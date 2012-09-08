@@ -1,0 +1,322 @@
+.. style::
+   :font_size: 32
+   :align: center
+   :layout.valign: center
+
+Useful Namespaces
+
+.. style::
+   :font_size: 12
+
+::
+
+Jack Diederich
+jackdied@gmail.com
+jackdied.blogspot.com
+
+Namespaces
+----
+
+.. style::
+   :font_size: 30
+
+Namespaces are one honking great idea -- let's do more of those!
+
+.. style::
+   :font_size: 20
+
+PEP 20:19  *The Zen of Python*
+
+Types of Namespaces
+---
+
+* Lexial Scope
+* Modules
+* Classes
+* Working Set
+
+Syntactic Sugar Matters
+----
+
+.. style::
+   :align: left
+   :font_size: 32
+   :background_color: white
+   :literal.background_color: white
+   :code_name_class.color: black
+   :code_name_function.color: black
+   :code_comment.color: blue
+
+- **Function Decorators** 2.4
+
+.. code::
+
+  @functools.wraps
+  def my_decorator(func):
+    def new_func(): pass
+    return new_func
+
+- **Class Decorators** 2.6
+
+  @functools.total_ordering
+  class MyClass():
+    def __lt__(self, other):
+       return self.value < other.value
+
+- **Context Managers** 2.5
+
+.. code::
+
+  with lock:
+    pass
+
+- **Monkey Patching** 3.? not yet standard
+
+Monkey Patching Bad
+----
+
+def slow_original(msg):
+  if isinstance(text, Message):
+    return len(msg.raw_text)
+  elif isinstance(msg, float):
+    return len('%4.2f' % msg)
+  else:
+    return len(msg)
+
+def fast_str(msg):
+  return len(msg)
+
+def fast_Message(msg):
+  return len(msg.raw_text)
+
+Monkey Patching Good
+----
+
+* Change the namespace briefly
+
+.. code::
+
+@monkeypatch('logging.slow_original', fast_str)
+def make_message(text):
+  logging.log(text)
+
+def make_message(text):
+  with monkeypatch('logging.slow_original', fast_str):
+    logging.log(text)
+
+Function Decorators
+----
+
+you can screw around with function __globals__, __doc__, __code__
+but mainly you want to change what is going in or coming out
+(redefine params, defaults, etc)
+"Touch-Up"
+@wraps
+
+
+Class Decorators
+----
+
+you can screw around with anything! even __class__ (the metaclass) [sometimes, not if it is type.
+@total_ordering
+
+Keeping things out of namespaces.
+----
+
+- bad old days 2.4
+
+.. code::
+
+  def do_work():
+    # do work
+  call_with_lock(do_work)
+
+.. code::
+
+  def call_with_lock(func):
+    # setup
+    lock.acquire()
+    try:
+      return func()
+    finally:
+      # cleanup
+      lock.release()
+
+Steup, Cleanup
+----
+
+.. code::
+
+  def my_decorator(func):
+    return func
+
+  class my_decorator():
+    def __init__(self, func):
+      self.func = func
+    def __call__(self, *args):
+      return self.func(*args)
+
+Setup, Cleanup
+----
+
+.. code::
+
+  class ContextManager(object):
+    def __enter__(self):
+      # setup
+    def __exit__(self, *traceback):
+      # cleanup
+
+.. code::
+
+  @contextlib.contextmanager
+  def do_work():
+    # setup
+    try:
+      yield None
+    finally:
+      # cleanup
+
+Side-by-Side
+----
+
+.. code::
+
+  class Decorator(object):       class ContextManager:
+    def __init__(self, func):      def __enter__(self):
+      self.func = func               # setup
+
+    def __call__(self):            def __exit__(self, *tb):
+      # setup		             # cleanup
+      self.func()	  
+      # cleanup         
+
+
+Side-by-Side
+----
+
+.. code::
+
+  class Decorator(object):       class ContextManager:
+    def __init__(self, func):
+      self.func = func       
+ 
+    def __call__(self):
+      # setup
+      self.func()
+      # cleanup
+
+                                   def __enter__(self):
+                                     # setup
+
+                                   def __exit__(self, *tb):
+                                     # cleanup
+
+Combined
+----
+
+.. code::
+
+  class Both(object):       
+    def __init__(self, gen):
+      self.gen = gen
+ 
+    def __call__(self, func):
+      def decorator():
+        with self:
+          return func()
+      return decorator
+
+    def __enter__(self):
+      # setup
+
+    def __exit__(self):
+      # cleanup
+
+  def make_both(func_generator):
+    gen = func_generator()
+  
+
+Monkey Patching
+----
+
+.. code::
+
+  @contextmanager
+  def monkey_patch(module, name, replacement):
+    original = getattr(module, name)
+    setattr(module, name, replacement)
+    try:
+      yield None
+    finally:
+      setattr(module, name, original)
+
+Monkey Patching
+----
+
+(but don't use this, use mock.patch)
+
+.. code::
+
+  @contextmanager
+  def monkey_patch(module, name, replacement):
+    original = getattr(module, name)
+    setattr(module, name, replacement)
+    try:
+      yield None
+    finally:
+      setattr(module, name, original)
+
+Logging
+----
+
+.. code::
+
+  with apiparty.log('bit.ly'):
+      bitly.shorten_url('http://python.org')
+
+  @contextlib.contextmanager
+  def log(*args):
+    msg = repr(args)
+    try:
+      yield None
+      log.info('OK ' + msg)
+    except Exception as e:
+      log.info(repr(e) + msg)
+
+Stateful
+----
+.. style::
+   :align: left
+   :font_size: 30
+
+.. code::
+
+  class ProcessState(object):
+    def __init__(self, args):
+      self.started = time.time()
+      self.process = subprocess.Popen(args)
+      self.save()
+
+    def save(self):
+      # store to database or pickle to disk  
+
+  @contextlib.contextmanager
+  def runner(self, *args):
+    state = ProcessState(*args)
+    try:
+      yield state
+    finally:
+      state.save()  
+
+Stateful
+----
+
+  with runner("hello_world.sh") as job:
+    too_old = job.started + 60
+    while True:
+      if too_old < time.time():
+        job.process.kill()
+        break 
+      time.sleep(1)
+    job.exit_status = job.process.exit_status
