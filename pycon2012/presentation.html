@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Stop Writing Classes</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="print" href="file://theme/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="file://theme/css/screen.css">
+    
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="file://theme/js/slides.js"></script>
+    
+    
+    <!-- /Javascripts -->
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Stop Writing Classes</h1></header>
+            
+            
+            <section><p class="titleslide">Jack Diederich, PyCon 2012</p>
+<p class="titleslide"><a class="reference external" href="mailto:jackdied&#64;gmail.com">jackdied&#64;gmail.com</a></p>
+<p class="titleslide"><a class="reference external" href="http://jackdied.blogspot.com">http://jackdied.blogspot.com</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Prefer Easy Things</h2></header>
+            
+            
+            <section><h1>Zen of Python</h1>
+<ul class="simple">
+<li>Simple is better than complex.</li>
+<li>Flat is better than nested.</li>
+<li>Readability counts.</li>
+<li>If the implementation is hard to explain, it's a bad idea.</li>
+<li>If the implementation is easy to explain, it may be a good idea.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Obfuscated Function Call</h2></header>
+            
+            
+            <section><pre><span class="k">class</span> <span class="nc">Greeting</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">greeting</span><span class="o">=</span><span class="s">&#39;hello&#39;</span><span class="p">):</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">greeting</span> <span class="o">=</span> <span class="n">greeting</span>
+
+    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">! </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">greeting</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="n">greeting</span> <span class="o">=</span> <span class="n">Greeting</span><span class="p">(</span><span class="s">&#39;bob&#39;</span><span class="p">,</span> <span class="s">&#39;hola&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">greeting</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
+</pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Obfuscated Function Call</h2></header>
+            
+            
+            <section><pre><span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">greeting</span><span class="o">=</span><span class="s">&#39;hello&#39;</span><span class="p">):</span>
+  <span class="n">ob</span> <span class="o">=</span> <span class="n">Greeting</span><span class="p">(</span><span class="s">&#39;bob&#39;</span><span class="p">,</span> <span class="s">&#39;hola&#39;</span><span class="p">)</span>
+  <span class="n">ob</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
+  <span class="k">return</span>
+</pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Obfuscated Function Call</h2></header>
+            
+            
+            <section><pre><span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">greeting</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">! </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">greeting</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+</pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Rest API via Classes</h2></header>
+            
+            
+            <section><ul class="simple">
+<li>Seperation of concerns!</li>
+<li>Namespacing!</li>
+<li>Encapsulation!</li>
+<li>Implementation Hiding!</li>
+</ul>
+<p>(in theory)</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Evolution of that API</h2></header>
+            
+            
+            <section><h2><em>Stage 1:</em></h2>
+<blockquote>
+<ul class="simple">
+<li>1 Package, 22 Modules</li>
+<li>20 Classes</li>
+<li>660 Source Lines of Code</li>
+</ul>
+</blockquote>
+<p>Some Real Gems.
+CakeHash.py is a module containing two lines.</p>
+<ul class="simple">
+<li>second line is 'pass'</li>
+<li>and the first one is 'class CakeHash(dict):' !</li>
+</ul>
+<p>So to use it you type 'CakeMail.CakeHash.CakeHash(foo=3)' instead of 'dict(foo=3)' or even &quot;{'foo' : 3}&quot;!</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Evolution of an API</h2></header>
+            
+            
+            <section><h2><em>Stage 2:</em></h2>
+<ul class="simple">
+<li>1 Class</li>
+<li>2 Functions, one of which is __init__</li>
+<li>15 Source Lines of Code</li>
+</ul>
+<pre><span class="k">class</span> <span class="nc">API</span><span class="p">:</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s">&#39;https://api.wbsrvc.com/&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">apikey</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">+</span> <span class="n">method</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/&#39;</span> <span class="o">+</span> <span class="n">method</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">urllib</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">params</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">header</span>
+        <span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+            <span class="k">return</span> <span class="n">response</span>
+        <span class="k">except</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">HTTPError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">Error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+</pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Evolution of an API</h2></header>
+            
+            
+            <section><pre><span class="n">CakeAPI</span><span class="o">.</span><span class="n">API</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s">&#39;SECRET_API_KEY&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&#39;Mailing&#39;</span><span class="p">,</span> <span class="s">&#39;stats&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre>
+<p>Can be aliased like this</p>
+<pre><span class="n">CakeAPI</span><span class="o">.</span><span class="n">request</span> <span class="o">=</span> <span class="n">API</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s">&#39;SECRET_API_KEY&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">call</span>
+</pre>
+<p>and used like the function it should have been</p>
+<pre><span class="n">CakeAPI</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">&#39;Mailling&#39;</span><span class="p">,</span> <span class="s">&#39;stats&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Evolution of an API</h2></header>
+            
+            
+            <section><pre><span class="n">CAKE_API</span> <span class="o">=</span> <span class="n">url</span><span class="o">=</span><span class="s">&#39;https://api.wbsrvc.com/</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">/&#39;</span>
+<span class="n">CAKE_API_KEY</span> <span class="o">=</span> <span class="s">&#39;SECRET-API-KEY&#39;</span>
+
+<span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="n">noun</span><span class="p">,</span> <span class="n">verb</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;apikey&#39;</span> <span class="p">:</span> <span class="n">CAKE_API_KEY</span><span class="p">}</span>
+    <span class="n">request</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">CAKE_API</span> <span class="o">%</span> <span class="p">(</span><span class="n">noun</span><span class="p">,</span> <span class="n">verb</span><span class="p">),</span>
+                              <span class="n">urllib</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">params</span><span class="p">),</span> <span class="n">headers</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Evolution of an API</h2></header>
+            
+            
+            <section><h2><em>Result:</em></h2>
+<blockquote>
+<ul class="simple">
+<li>1 Package + 20 Modules =&gt; 1 Module</li>
+<li>20 Classes =&gt; 1 Class =&gt; 0 Classes</li>
+<li>130 methods =&gt; 2 methods =&gt; 1 function</li>
+<li>660 SLOC =&gt; 15 SLOC =&gt; 5 SLOC</li>
+<li>Easier to use!</li>
+</ul>
+</blockquote></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Namespaces are there to help</h2></header>
+            
+            
+            <section><ul class="simple">
+<li>Namespaces are for preventing name collisions</li>
+<li>not for creating taxonomies</li>
+<li>services.crawler.crawlerexceptions.ArticleNotFoundException<ul>
+<li>requires typing 'crawler' and 'exception' twice each!</li>
+<li>BeerError or EmptyBeer or BeerNotFound</li>
+<li>but not EmptyBeerNotFoundError</li>
+</ul>
+</li>
+</ul>
+<pre><span class="k">try</span><span class="p">:</span>
+  <span class="n">get_article</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">ArticleNotFound</span><span class="p">:</span> <span class="c"># &lt;---- we know this is an exception because of the except</span>
+  <span class="k">pass</span>
+</pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Python stdlib</h2></header>
+            
+            
+            <section><ul class="simple">
+<li>200k SLOC</li>
+<li>200 top level modules</li>
+<li>averages 10 files per package</li>
+<li>defines 165 Exceptions</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Sometimes you do want a class</h2></header>
+            
+            
+            <section><ul class="simple">
+<li>Containers are a great use case for classes</li>
+<li>heapq is a stdlib container without a class</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>heapq</h2></header>
+            
+            
+            <section><ul class="simple">
+<li>Containers are a great use case for classes</li>
+<li>heapq is a stdlib container without a class</li>
+</ul>
+<pre><span class="k">def</span> <span class="nf">heapify</span><span class="p">(</span><span class="n">data</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">pushleft</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">popleft</span><span class="p">(</span><span class="n">data</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">pushright</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">popright</span><span class="p">(</span><span class="n">data</span><span class="p">):</span> <span class="k">pass</span>
+</pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>heapq</h2></header>
+            
+            
+            <section><pre><span class="k">def</span> <span class="nf">heapify</span><span class="p">(</span><span class="n">data</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">pushleft</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">popleft</span><span class="p">(</span><span class="n">data</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">pushright</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span> <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">popright</span><span class="p">(</span><span class="n">data</span><span class="p">):</span> <span class="k">pass</span>
+</pre>
+<pre><span class="k">class</span> <span class="nc">Heap</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heap</span> <span class="o">=</span> <span class="n">data</span> <span class="ow">or</span> <span class="p">[]</span>
+        <span class="n">heapq</span><span class="o">.</span><span class="n">heapify</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heap</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+
+    <span class="k">def</span> <span class="nf">pushleft</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="n">item</span><span class="p">),</span> <span class="n">item</span><span class="p">)</span>
+        <span class="n">heapq</span><span class="o">.</span><span class="n">pushleft</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heap</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">popleft</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">heapq</span><span class="o">.</span><span class="n">popleft</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heap</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+</pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Classes Encourage Atrocities</h2></header>
+            
+            
+            <section><ul class="simple">
+<li>Oauth2 implementation</li>
+<li><a class="reference external" href="http://code.google.com/p/google-api-python-client/source/browse/">http://code.google.com/p/google-api-python-client/source/browse/</a></li>
+<li>10,000 SLOC, 115 modules, 207 classes</li>
+<li><em>&quot;I decline any responsibility for Google API client code.&quot;</em> -- Guido Van Rossum</li>
+</ul>
+<pre><span class="k">class</span> <span class="nc">Flow</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base class for all Flow objects.&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Storage</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span> <span class="n">_abstract</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="n">_abstract</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">_abstract</span><span class="p">():</span> <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Classes Encourage Atrocities</h2></header>
+            
+            
+            <section><ul class="simple">
+<li>python-oauth2 doesn't do oauth2!</li>
+<li>540 SLOC, 15 classes.</li>
+</ul>
+<p>Rewrite to do oauth2 only.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/jackdied/python-foauth2">https://github.com/jackdied/python-foauth2</a></li>
+<li>135 SLOC, 3 classes (2 too many!)</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Conway's Really Simple Game of Life</h2></header>
+            
+            
+            <section><pre><span class="k">class</span> <span class="nc">Cell</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">alive</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">alive</span> <span class="o">=</span> <span class="n">alive</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">None</span>
+
+  <span class="k">def</span> <span class="nf">neighbors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="k">yield</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+     <span class="k">yield</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+     <span class="c"># ...</span>
+     <span class="k">yield</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Board</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">cells</span> <span class="o">=</span> <span class="p">{}</span> <span class="c"># { (x, y) : Cell() }</span>
+
+  <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
+
+  <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span>
+
+  <span class="k">def</span> <span class="nf">advance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">cell</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+      <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">neighbors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">cell</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: talk.rst -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Conway's Really Simple Game of Life</h2></header>
+            
+            
+            <section><pre><span class="k">def</span> <span class="nf">neighbors</span><span class="p">(</span><span class="n">point</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">point</span>
+    <span class="k">yield</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span>
+    <span class="k">yield</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span>
+    <span class="k">yield</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">yield</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">yield</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">yield</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">yield</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">yield</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">advance</span><span class="p">(</span><span class="n">board</span><span class="p">):</span>
+    <span class="n">newstate</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">recalc</span> <span class="o">=</span> <span class="n">board</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="n">neighbors</span><span class="p">,</span> <span class="n">board</span><span class="p">)))</span>
+    <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">recalc</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">neigh</span> <span class="ow">in</span> <span class="n">board</span><span class="p">)</span> <span class="k">for</span> <span class="n">neigh</span> <span class="ow">in</span> <span class="n">neighbors</span><span class="p">(</span><span class="n">point</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">or</span> <span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">board</span><span class="p">):</span>
+            <span class="n">newstate</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">newstate</span>
+
+<span class="n">glider</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">glider</span> <span class="o">=</span> <span class="n">advance</span><span class="p">(</span><span class="n">glider</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">glider</span>
+</pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="talk.rst">talk.rst</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/20
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">Stop Writing Classes</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-2" class="sub">
+          <th><a href="#slide2">Prefer Easy Things</a></th>
+          <td><a href="#slide2">2</a></td>
+        </tr>
+        
+        <tr id="toc-row-3" class="sub">
+          <th><a href="#slide3">Obfuscated Function Call</a></th>
+          <td><a href="#slide3">3</a></td>
+        </tr>
+        
+        <tr id="toc-row-4" class="sub">
+          <th><a href="#slide4">Obfuscated Function Call</a></th>
+          <td><a href="#slide4">4</a></td>
+        </tr>
+        
+        <tr id="toc-row-5" class="sub">
+          <th><a href="#slide5">Obfuscated Function Call</a></th>
+          <td><a href="#slide5">5</a></td>
+        </tr>
+        
+        <tr id="toc-row-6" class="sub">
+          <th><a href="#slide6">Rest API via Classes</a></th>
+          <td><a href="#slide6">6</a></td>
+        </tr>
+        
+        <tr id="toc-row-7" class="sub">
+          <th><a href="#slide7">Evolution of that API</a></th>
+          <td><a href="#slide7">7</a></td>
+        </tr>
+        
+        <tr id="toc-row-8" class="sub">
+          <th><a href="#slide8">Evolution of an API</a></th>
+          <td><a href="#slide8">8</a></td>
+        </tr>
+        
+        <tr id="toc-row-9" class="sub">
+          <th><a href="#slide9">Evolution of an API</a></th>
+          <td><a href="#slide9">9</a></td>
+        </tr>
+        
+        <tr id="toc-row-10" class="sub">
+          <th><a href="#slide10">Evolution of an API</a></th>
+          <td><a href="#slide10">10</a></td>
+        </tr>
+        
+        <tr id="toc-row-11" class="sub">
+          <th><a href="#slide11">Evolution of an API</a></th>
+          <td><a href="#slide11">11</a></td>
+        </tr>
+        
+        <tr id="toc-row-12" class="sub">
+          <th><a href="#slide12">Namespaces are there to help</a></th>
+          <td><a href="#slide12">12</a></td>
+        </tr>
+        
+        <tr id="toc-row-13" class="sub">
+          <th><a href="#slide13">Python stdlib</a></th>
+          <td><a href="#slide13">13</a></td>
+        </tr>
+        
+        <tr id="toc-row-14" class="sub">
+          <th><a href="#slide14">Sometimes you do want a class</a></th>
+          <td><a href="#slide14">14</a></td>
+        </tr>
+        
+        <tr id="toc-row-15" class="sub">
+          <th><a href="#slide15">heapq</a></th>
+          <td><a href="#slide15">15</a></td>
+        </tr>
+        
+        <tr id="toc-row-16" class="sub">
+          <th><a href="#slide16">heapq</a></th>
+          <td><a href="#slide16">16</a></td>
+        </tr>
+        
+        <tr id="toc-row-17" class="sub">
+          <th><a href="#slide17">Classes Encourage Atrocities</a></th>
+          <td><a href="#slide17">17</a></td>
+        </tr>
+        
+        <tr id="toc-row-18" class="sub">
+          <th><a href="#slide18">Classes Encourage Atrocities</a></th>
+          <td><a href="#slide18">18</a></td>
+        </tr>
+        
+        <tr id="toc-row-19" class="sub">
+          <th><a href="#slide19">Conway's Really Simple Game of Life</a></th>
+          <td><a href="#slide19">19</a></td>
+        </tr>
+        
+        <tr id="toc-row-20" class="sub">
+          <th><a href="#slide20">Conway's Really Simple Game of Life</a></th>
+          <td><a href="#slide20">20</a></td>
+        </tr>
+        
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>

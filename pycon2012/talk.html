@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.6: http://docutils.sourceforge.net/" />
+<meta name="version" content="S5 1.1" />
+<title>Stop Writing Classes</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 5951 2009-05-18 18:03:10Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left{
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: left }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+<!-- configuration parameters -->
+<meta name="defaultView" content="slideshow" />
+<meta name="controlVis" content="hidden" />
+<!-- style sheet links -->
+<script src="ui/default/slides.js" type="text/javascript"></script>
+<link rel="stylesheet" href="ui/default/slides.css"
+      type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="ui/default/outline.css"
+      type="text/css" media="screen" id="outlineStyle" />
+<link rel="stylesheet" href="ui/default/print.css"
+      type="text/css" media="print" id="slidePrint" />
+<link rel="stylesheet" href="ui/default/opera.css"
+      type="text/css" media="projection" id="operaFix" />
+
+<style type="text/css">
+#currentSlide {display: none;}
+</style>
+</head>
+<body>
+<div class="layout">
+<div id="controls"></div>
+<div id="currentSlide"></div>
+<div id="header">
+
+</div>
+<div id="footer">
+<h1>Stop Writing Classes</h1>
+<h2>Jack Diederich - PyCon 2012</h2>
+</div>
+</div>
+<div class="presentation">
+<div class="slide" id="slide0">
+<h1 class="title">Stop Writing Classes</h1>
+
+<!-- Definitions of interpreted text roles (classes) for S5/HTML data. -->
+<!-- This data file has been placed in the public domain. -->
+<!-- Colours
+======= -->
+<!-- Text Sizes
+========== -->
+<!-- Display in Slides (Presentation Mode) Only
+========================================== -->
+<!-- Display in Outline Mode Only
+============================ -->
+<!-- Display in Print Only
+===================== -->
+<!-- Display in Handout Mode Only
+============================ -->
+<!-- Incremental Display
+=================== -->
+<blockquote>
+<p>Jack Diederich PyCon 2012</p>
+<p><a class="reference external" href="mailto:jackdied&#64;gmail.com">jackdied&#64;gmail.com</a></p>
+<p>jackdied.blogspot.com</p>
+</blockquote>
+
+</div>
+<div class="slide" id="prefer-easy-things">
+<h1>Prefer Easy Things</h1>
+<div class="section" id="zen-of-python">
+<h2>Zen of Python</h2>
+<ul class="simple">
+<li>Simple is better than complex.</li>
+<li>Flat is better than nested.</li>
+<li>Readability counts.</li>
+<li>If the implementation is hard to explain, it's a bad idea.</li>
+<li>If the implementation is easy to explain, it may be a good idea.</li>
+</ul>
+</div>
+</div>
+<div class="slide" id="id1">
+<h1>Prefer Easy Things</h1>
+<ul class="simple">
+<li>Don't do hard things in the first place</li>
+<li>Revert complications later</li>
+</ul>
+<p><em>&quot;I hate code and I want as little of it as possible in our product&quot;</em></p>
+<p>-me, always</p>
+</div>
+<div class="slide" id="obfuscated-function-call">
+<h1>Obfuscated Function Call</h1>
+<pre class="literal-block">
+class Greeting(object):
+    def __init__(self, greeting='hello'):
+      self.greeting = greeting
+
+    def greet(self, name):
+      return '%s! %s' % (self.greeting, name)
+
+greeting = Greeting('hola')
+print greeting.greet('bob')
+</pre>
+</div>
+<div class="slide" id="de-obfuscated-function-call">
+<h1>De-obfuscated Function Call</h1>
+<pre class="literal-block">
+def greet(name):
+  ob = Greeting('hola')
+  print ob.greet('bob')
+  return
+</pre>
+</div>
+<div class="slide" id="id2">
+<h1>De-obfuscated Function Call</h1>
+<pre class="literal-block">
+def greet(name):
+  ob = Greeting('hola')
+  print ob.greet('bob')
+  return
+</pre>
+<pre class="literal-block">
+def greet(greeting, target):
+    return '%s! %s' % (greeting, target)
+</pre>
+</div>
+<div class="slide" id="id3">
+<h1>De-obfuscated Function Call</h1>
+<pre class="literal-block">
+def greet(name):
+  ob = Greeting('hola')
+  print ob.greet('bob')
+  return
+</pre>
+<pre class="literal-block">
+def greet(greeting, target):
+    return '%s! %s' % (greeting, target)
+</pre>
+<pre class="literal-block">
+import functools
+greet = functools.partial(greet, 'hola')
+greet('bob')
+</pre>
+</div>
+<div class="slide" id="classes-give-us-lovely-things">
+<h1>Classes give us lovely things</h1>
+<ul class="simple">
+<li>Separation of concerns!</li>
+<li>Decoupling!</li>
+<li>Encapsulation!</li>
+<li>Implementation Hiding!</li>
+</ul>
+<p>(in theory)</p>
+</div>
+<div class="slide" id="evolution-of-an-api-stage-1">
+<h1>Evolution of an API: Stage 1</h1>
+<ul class="simple">
+<li>1 Package, 22 Modules</li>
+<li>20 Classes</li>
+<li>660 Source Lines of Code</li>
+</ul>
+<p>MuffinHash.py is a module containing two lines.</p>
+</div>
+<div class="slide" id="id4">
+<h1>Evolution of an API: Stage 1</h1>
+<ul class="simple">
+<li>1 Package, 22 Modules</li>
+<li>20 Classes</li>
+<li>660 Source Lines of Code</li>
+</ul>
+<p>MuffinHash.py is a module containing two lines.</p>
+<pre class="literal-block">
+class MuffinHash(dict):
+  pass
+</pre>
+</div>
+<div class="slide" id="id5">
+<h1>Evolution of an API: Stage 1</h1>
+<pre class="literal-block">
+d = MuffinMail.MuffinHash.MuffinHash(foo=3)
+
+d = dict(foo=3)
+
+d = {'foo' : 3}
+</pre>
+</div>
+<div class="slide" id="evolution-of-an-api-stage-2">
+<h1>Evolution of an API: Stage 2</h1>
+
+<pre class="literal-block" style="font-size:smaller;">
+class API:
+    def __init__(self, key):
+        self.header = dict(apikey=key)
+
+    def call(self, method, params):
+        request = urllib2.Request(
+            self.url + method[0] + '/' + method[1],
+            urllib.urlencode(params),
+            self.header)
+        try:
+            response = json.loads(urllib2.urlopen(request).read())
+            return response
+        except urllib2.HTTPError as error:
+            return dict(Error=str(error))
+</pre>
+</div>
+<div class="slide" id="evolution-of-an-api">
+<h1>Evolution of an API</h1>
+<pre class="literal-bloc" style="font-size:smaller;">
+MuffinAPI.API(key='SECRET_API_KEY').call(('Mailing', 'stats'),<br>{id:1})
+</pre>
+<p style="font-size:smaller;">Can be aliased like this</p>
+<pre class="literal-block" style="font-size:smaller;">
+MuffinAPI.request = API(key='SECRET_API_KEY').call
+</pre>
+<p style="font-size:smaller;">and used like the function it should have been</p>
+<pre class="literal-block" style="font-size:smaller;">
+MuffinAPI.request(('Mailling', 'stats'), {id:1})
+</pre>
+</div>
+<div class="slide" id="id6">
+<h1>Evolution of an API</h1>
+<pre class="literal-block" style="font-size:smaller;">
+MUFFIN_API = url='https://api.wbsrvc.com/%s/%s/'
+MUFFIN_API_KEY = 'SECRET-API-KEY'
+
+def request(noun, verb, **params):
+    headers = {'apikey' : MUFFIN_API_KEY}
+    request = urllib2.Request(MUFFIN_API % (noun, verb),
+                              urllib.urlencode(params), headers)
+    return json.loads(urllib2.urlopen(request).read())
+</pre>
+</div>
+<div class="slide" id="id7">
+<h1>Evolution of an API</h1>
+<ul class="simple">
+<li>1 Package + 20 Modules =&gt; 1 Module</li>
+<li>20 Classes =&gt; 1 Class =&gt; 0 Classes</li>
+<li>130 methods =&gt; 2 methods =&gt; 1 function</li>
+<li>660 SLOC =&gt; 15 SLOC =&gt; 5 SLOC</li>
+<li>Easier to use!</li>
+</ul>
+</div>
+<div class="slide" id="namespaces-are-there-to-help">
+<h1>Namespaces are there to help</h1>
+<ul class="simple">
+<li>Namespaces are for preventing name collisions</li>
+<li>not for creating taxonomies</li>
+</ul>
+</div>
+<div class="slide" id="id8">
+<h1>Namespaces are there to help</h1>
+<pre class="literal-block" style="font-size:smaller;">
+services.crawler.crawlerexceptions.ArticleNotFoundException
+</pre>
+<ul class="simple" style="font-size:smaller;">
+<li>requires typing 'crawler' and 'exception' twice each!</li>
+<li>EmptyBeer or BeerError or BeerNotFound</li>
+<li>but not EmptyBeerNotFoundError</li>
+<li>but why not LookupError?</li>
+</ul>
+<pre class="literal-block" style="font-size:smaller;">
+try:
+  get_article()
+  raise LookupError() # this raises an exception
+except ArticleNotFound: # this catches an exception
+  pass
+</pre>
+</div>
+<div class="slide" id="python-standard-library">
+<h1>Python Standard Library</h1>
+<ul class="simple">
+<li>200k SLOC</li>
+<li>200 top level modules</li>
+<li>averages 10 files per package</li>
+<li>defines 165 Exceptions</li>
+</ul>
+</div>
+<div class="slide" id="sometimes-you-do-want-a-class">
+<h1>Sometimes you do want a class</h1>
+<ul class="simple">
+<li>Containers are a great use case for classes</li>
+<li>heapq is a stdlib container without a class</li>
+</ul>
+</div>
+<div class="slide" id="id9">
+<h1>Sometimes you do want a class</h1>
+<ul class="simple">
+<li>Containers are a great use case for classes</li>
+<li>heapq is a stdlib container without a class</li>
+</ul>
+<pre class="literal-block">
+def heapify(data): pass
+def pushleft(data, item): pass
+def popleft(data): pass
+def pushright(data, item): pass
+def popright(data): pass
+# etc
+</pre>
+</div>
+<div class="slide" id="heapq">
+<h1>heapq</h1>
+<pre class="literal-block" style="font-size:smaller;">
+class Heap(object):
+    def __init__(self, data=None, key=lambda x:None):
+        self.heap = data or []
+        heapq.heapify(self.heap)
+        self.key = key
+
+    def pushleft(self, item):
+        if self.key:
+            item = (self.key(item), item)
+        heapq.pushleft(self.heap, item)
+
+    def popleft(self):
+        return heapq.popleft(self.heap)[1]
+</pre>
+</div>
+<div class="slide" id="classes-encourage-atrocities">
+<h1>Classes Encourage Atrocities</h1>
+<ul class="simple" style="font-size:smaller;">
+<li>Oauth2 implementation</li>
+<li><a class="reference external" href="http://code.google.com/p/google-api-python-client/source/browse/">http://code.google.com/p/google-api-python-client/source/browse/</a></li>
+<li>10,000 SLOC, 115 modules, 207 classes</li>
+<li><em>&quot;I decline any responsibility for Google API client code.&quot;</em> -- Guido Van Rossum</li>
+</ul>
+<pre class="literal-block" style="font-size:smaller;">
+class Flow(object):
+    &quot;&quot;&quot;Base class for all Flow objects.&quot;&quot;&quot;
+    pass
+
+class Storage(object):
+    def put(self, data): _abstract()
+    def get(self): _abstract()
+
+def _abstract(): raise NotImplementedError
+</pre>
+</div>
+<div class="slide" id="id10">
+<h1>Classes Encourage Atrocities</h1>
+<ul class="simple">
+<li>python-oauth2 doesn't do oauth2!</li>
+<li>540 SLOC, 15 classes.</li>
+</ul>
+<p>Rewrite to do oauth2 only.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/jackdied/python-foauth2">https://github.com/jackdied/python-foauth2</a></li>
+<li>135 SLOC, 3 classes (2 too many!)</li>
+</ul>
+</div>
+<div class="slide" id="conway-s-game-of-life">
+<h1>Conway's Game of Life</h1>
+<p style="font-size:smaller;">Pulsar</p>
+<img src="pulsar.gif">
+<p style="font-size:smaller;">Glider</p>
+<img src="glider.gif">
+</div>
+<div class="slide" id="id11">
+<h1>Conway's Game of Life</h1>
+<pre class="literal-block" style="font-size:smaller;">
+class Cell(object):
+  def __init__(self, x, y, alive=True):
+     self.x = x
+     self.y = y
+     self.alive = alive
+     self.next = None
+
+  def neighbors(self):
+     yield (self.x + 1, self.y)
+     yield (self.x + 1, self.y + 1)
+     # ...
+     yield (self.x + 1, self.y)
+</pre>
+</div>
+<div class="slide" id="id11x">
+<h1>Conway's Game of Life</h1>
+<pre class="literal-block" style="font-size:smaller;">
+class Board(object):
+  def __init__(self):
+     self.cells = {} # { (x, y) : Cell() }
+
+  def advance(self):
+    for (x, y), cell in self.cells.items():
+      if len(cell.neighbors) &gt; 3:
+        cell.next = False
+</pre>
+</div>
+<div class="slide" id="conway-s-really-simple-game-of-life">
+<h1>Conway's Really Simple Game of Life</h1>
+<pre class="literal-block" style="font-size:smaller;">
+def neighbors(point):
+    x, y = point
+    yield x + 1, y
+    yield x - 1, y
+    yield x, y + 1
+    yield x, y - 1
+    yield x + 1, y + 1
+    yield x + 1, y - 1
+    yield x - 1, y + 1
+    yield x - 1, y - 1
+</pre>
+</div>
+<div class="slide" id="conway-s-really-simple-game-of-lifex">
+<h1>Conway's Really Simple Game of Life</h1>
+<pre class="literal-block" style="font-size:smaller;">
+def advance(board):
+    newstate = set()
+    recalc = board | set(itertools.chain(*map(neighbors, board)))
+    for point in recalc:
+        count = sum((neigh in board)
+                    for neigh in neighbors(point))
+        if count == 3 or (count == 2 and point in board):
+            newstate.add(point)
+    return newstate
+
+glider = set([(0, 0), (1, 0), (2, 0), (0, 1), (1, 2)])
+  for i in range(1000):
+    glider = advance(glider)
+print glider
+</pre>
+</div>
+<div class="slide" id="conway-s-really-simple-game-of-lifexx">
+<h1>Conway's Really Simple Game of Life</h1>
+<span style="font-size:larger;">Questions?</span>
+</div>
+</div>
+</body>
+</html>
