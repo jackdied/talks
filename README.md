@@ -15,4 +15,7 @@ Useful Namespaces
   cd pycon2011/ && make
   http://pyvideo.org/video/395/pycon-2011--useful-namespaces--context-managers-a
 
-Some others I don't have handy on my laptop but might upload later:  'Class Decorators: Radically Simple', 'Python's Dusty Corners', 'Writing Your Own Python Types in C' ... that doesn't feel like a full list but I can't think of any others.
+Class Decorators: Radically Simple (PyCon 2009)
+  https://www.youtube.com/watch?v=cAGliEJV9_o
+
+Some others I don't have handy on my laptop but might upload later: 'Python's Dusty Corners', 'Writing Your Own Python Types in C' ... that doesn't feel like a full list but I can't think of any others.
